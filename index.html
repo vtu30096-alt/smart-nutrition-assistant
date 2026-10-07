@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Nutrition Assistant</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f8f6;color:#18352a}
+nav{background:#163d2c;color:white;padding:18px 8%;display:flex;justify-content:space-between;align-items:center}
+nav h2{margin:0} nav a{color:white;text-decoration:none;margin-left:25px}
+.hero{padding:70px 8%;background:linear-gradient(135deg,#dff5e8,#f8fff9)}
+.hero h1{font-size:42px;margin:0 0 15px}.hero p{font-size:18px;max-width:650px;line-height:1.6}
+.container{max-width:1000px;margin:35px auto;padding:0 20px}
+.card{background:white;padding:28px;border-radius:18px;box-shadow:0 5px 20px #00000012;margin-bottom:25px}
+h2{color:#195c3e}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+label{font-weight:bold;display:block;margin-bottom:7px}
+input,select{width:100%;padding:12px;border:1px solid #ccd8d1;border-radius:9px;font-size:15px}
+button{background:#1d754d;color:white;border:0;padding:14px 24px;border-radius:9px;font-size:16px;cursor:pointer;margin-top:20px}
+button:hover{background:#145a3b}
+.result{display:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.stat{background:#eef8f1;padding:20px;border-radius:12px;text-align:center}
+.stat strong{display:block;font-size:26px;color:#17613f;margin-top:8px}
+.meals{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.meal{padding:20px;border:1px solid #dce9e1;border-radius:12px}
+footer{text-align:center;padding:30px;background:#163d2c;color:white;margin-top:50px}
+@media(max-width:700px){.form-grid,.stats,.meals{grid-template-columns:1fr}.hero h1{font-size:32px}nav{padding:16px 5%}}
+</style>
+</head>
+<body>
+
+<nav>
+<h2>🥗 Smart Nutrition Assistant</h2>
+<div><a href="#planner">Planner</a><a href="#about">About</a></div>
+</nav>
+
+<section class="hero">
+<h1>Your Smart Nutrition Assistant</h1>
+<p>Enter your basic details to calculate BMI, estimate daily calories, and receive a simple personalized meal plan.</p>
+</section>
+
+<div class="container" id="planner">
+<div class="card">
+<h2>Nutrition Planner</h2>
+<div class="form-grid">
+<div><label>Name</label><input id="name" placeholder="Enter your name"></div>
+<div><label>Age</label><input id="age" type="number" placeholder="Example: 20"></div>
+<div><label>Gender</label><select id="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
+<div><label>Height (cm)</label><input id="height" type="number" placeholder="Example: 170"></div>
+<div><label>Weight (kg)</label><input id="weight" type="number" placeholder="Example: 65"></div>
+<div><label>Activity Level</label><select id="activity"><option value="1.2">Sedentary</option><option value="1.375">Lightly Active</option><option value="1.55">Moderately Active</option><option value="1.725">Very Active</option></select></div>
+<div><label>Nutrition Goal</label><select id="goal"><option value="maintain">Maintain Weight</option><option value="loss">Weight Loss</option><option value="gain">Weight Gain</option></select></div>
+<div><label>Food Preference</label><select id="food"><option>Vegetarian</option><option>Non-Vegetarian</option><option>Vegan</option></select></div>
+</div>
+<button onclick="calculate()">Generate My Nutrition Plan</button>
+</div>
+
+<div class="card result" id="result">
+<h2>Hello, <span id="userName"></span>! 👋</h2>
+<div class="stats">
+<div class="stat">BMI<strong id="bmi"></strong><span id="category"></span></div>
+<div class="stat">Daily Calories<strong id="calories"></strong><span>kcal/day</span></div>
+<div class="stat">Food Preference<strong id="pref"></strong></div>
+</div>
+</div>
+
+<div class="card result" id="mealCard">
+<h2>Suggested Meal Plan</h2>
+<div class="meals">
+<div class="meal"><h3>🌅 Breakfast</h3><p id="breakfast"></p></div>
+<div class="meal"><h3>☀️ Lunch</h3><p id="lunch"></p></div>
+<div class="meal"><h3>🌙 Dinner</h3><p id="dinner"></p></div>
+</div>
+</div>
+
+<div class="card" id="about">
+<h2>About the Project</h2>
+<p><b>Smart Nutrition Assistant</b> is an educational web-based prototype. It uses HTML, CSS and JavaScript to calculate BMI, estimate calorie requirements using a BMR-based formula, and provide simple meal suggestions based on user preferences.</p>
+<p><b>Note:</b> This project is for educational/demo purposes and is not medical advice.</p>
+</div>
+</div>
+
+<footer>Smart Nutrition Assistant | Minor Project Demo</footer>
+
+<script>
+function calculate(){
+ const name=document.getElementById("name").value || "User";
+ const age=Number(document.getElementById("age").value);
+ const gender=document.getElementById("gender").value;
+ const height=Number(document.getElementById("height").value);
+ const weight=Number(document.getElementById("weight").value);
+ const activity=Number(document.getElementById("activity").value);
+ const goal=document.getElementById("goal").value;
+ const food=document.getElementById("food").value;
+
+ if(!age || !height || !weight || !gender){alert("Please fill in age, gender, height and weight.");return;}
+
+ const bmi=weight/((height/100)*(height/100));
+ let category=bmi<18.5?"Underweight":bmi<25?"Normal":bmi<30?"Overweight":"Obesity";
+
+ let bmr=gender==="Male"?(10*weight+6.25*height-5*age+5):(10*weight+6.25*height-5*age-161);
+ let calories=bmr*activity;
+ if(goal==="loss") calories-=300;
+ if(goal==="gain") calories+=300;
+
+ document.getElementById("userName").textContent=name;
+ document.getElementById("bmi").textContent=bmi.toFixed(1);
+ document.getElementById("category").textContent=category;
+ document.getElementById("calories").textContent=Math.round(calories);
+ document.getElementById("pref").textContent=food;
+
+ let meals;
+ if(food==="Vegetarian"){
+   meals=["Oats with milk, banana and nuts","Rice/roti with dal, vegetables and curd","Chapati with paneer/tofu and vegetables"];
+ }else if(food==="Vegan"){
+   meals=["Oats with plant milk, banana and nuts","Rice with dal, vegetables and salad","Chapati with tofu and mixed vegetables"];
+ }else{
+   meals=["Eggs with whole-grain toast and fruit","Rice/roti with chicken, dal and vegetables","Grilled chicken/fish with vegetables and chapati"];
+ }
+ document.getElementById("breakfast").textContent=meals[0];
+ document.getElementById("lunch").textContent=meals[1];
+ document.getElementById("dinner").textContent=meals[2];
+
+ document.querySelectorAll(".result").forEach(x=>x.style.display="block");
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>
