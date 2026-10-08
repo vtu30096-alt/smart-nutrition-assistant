@@ -1,131 +1,1234 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Nutrition Assistant</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f8f6;color:#18352a}
-nav{background:#163d2c;color:white;padding:18px 8%;display:flex;justify-content:space-between;align-items:center}
-nav h2{margin:0} nav a{color:white;text-decoration:none;margin-left:25px}
-.hero{padding:70px 8%;background:linear-gradient(135deg,#dff5e8,#f8fff9)}
-.hero h1{font-size:42px;margin:0 0 15px}.hero p{font-size:18px;max-width:650px;line-height:1.6}
-.container{max-width:1000px;margin:35px auto;padding:0 20px}
-.card{background:white;padding:28px;border-radius:18px;box-shadow:0 5px 20px #00000012;margin-bottom:25px}
-h2{color:#195c3e}
-.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-label{font-weight:bold;display:block;margin-bottom:7px}
-input,select{width:100%;padding:12px;border:1px solid #ccd8d1;border-radius:9px;font-size:15px}
-button{background:#1d754d;color:white;border:0;padding:14px 24px;border-radius:9px;font-size:16px;cursor:pointer;margin-top:20px}
-button:hover{background:#145a3b}
-.result{display:none}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.stat{background:#eef8f1;padding:20px;border-radius:12px;text-align:center}
-.stat strong{display:block;font-size:26px;color:#17613f;margin-top:8px}
-.meals{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.meal{padding:20px;border:1px solid #dce9e1;border-radius:12px}
-footer{text-align:center;padding:30px;background:#163d2c;color:white;margin-top:50px}
-@media(max-width:700px){.form-grid,.stats,.meals{grid-template-columns:1fr}.hero h1{font-size:32px}nav{padding:16px 5%}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>T. Maruthi | Smart Nutrition Assistant | Portfolio</title>
+
+  <meta name="description"
+        content="T. Maruthi's portfolio and Smart Nutrition Assistant project — an AI-powered personalized nutrition and health management web project.">
+
+  <meta name="author" content="T. Maruthi">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:title" content="T. Maruthi | Smart Nutrition Assistant">
+  <meta property="og:description"
+        content="Portfolio and project showcase for T. Maruthi's Smart Nutrition Assistant.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root {
+      --bg: #f6faf9;
+      --surface: #ffffff;
+      --text: #102a2a;
+      --muted: #5f7474;
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --accent: #dff7f2;
+      --border: #dce9e6;
+      --shadow: 0 18px 50px rgba(15,118,110,.10);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: linear-gradient(
+        180deg,
+        #effaf7 0%,
+        var(--bg) 38%,
+        #ffffff 100%
+      );
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+    }
+
+    .links {
+      display: flex;
+      gap: 24px;
+      font-weight: 600;
+      color: #365454;
+    }
+
+    .links a:hover {
+      color: var(--primary);
+    }
+
+    /* HERO */
+
+    .hero {
+      padding: 88px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1.02;
+      margin: 18px 0;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.12rem;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 19px;
+      border-radius: 12px;
+      font-weight: 800;
+      border: 1px solid var(--primary);
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn.secondary {
+      color: var(--primary);
+      background: white;
+    }
+
+    /* PROFILE */
+
+    .profile-card {
+      background: var(--surface);
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .avatar {
+      width: 82px;
+      height: 82px;
+      border-radius: 24px;
+      background: var(--primary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem;
+      font-weight: 900;
+    }
+
+    .profile-card h3 {
+      margin: 20px 0 4px;
+      font-size: 1.5rem;
+    }
+
+    .profile-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .mini {
+      margin-top: 22px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: grid;
+      gap: 10px;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 76px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 10px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      max-width: 720px;
+      margin: 0 0 32px;
+    }
+
+    /* CARDS */
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.04);
+    }
+
+    .card h3 {
+      margin-top: 0;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    /* SKILLS */
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill {
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: #edf7f5;
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    /* PROJECT */
+
+    .project {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .project-panel {
+      background: linear-gradient(
+        135deg,
+        #0f766e,
+        #134e4a
+      );
+      color: white;
+      border-radius: 28px;
+      padding: 34px;
+    }
+
+    .project-panel p {
+      color: #d8efeb;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .feature-list li:before {
+      content: "✓";
+      font-weight: 900;
+      margin-right: 10px;
+    }
+
+    /* NUTRITION PLANNER */
+
+    .planner {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: .9rem;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cdddda;
+      border-radius: 11px;
+      font: inherit;
+      background: white;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      background: #effaf7;
+      border: 1px solid #cbe9e3;
+      border-radius: 18px;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stat b {
+      display: block;
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+    }
+
+    .notice {
+      font-size: .86rem;
+      color: var(--muted);
+    }
+
+    /* FOOTER */
+
+    footer {
+      padding: 34px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:800px) {
+
+      .hero-grid,
+      .project {
+        grid-template-columns: 1fr;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .links {
+        gap: 12px;
+        font-size: .9rem;
+      }
+
+      .hero {
+        padding-top: 55px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:500px) {
+
+      .links a:nth-child(2),
+      .links a:nth-child(3) {
+        display: none;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
+<!-- NAVIGATION -->
+
 <nav>
-<h2>🥗 Smart Nutrition Assistant</h2>
-<div><a href="#planner">Planner</a><a href="#about">About</a></div>
+  <div class="container nav-inner">
+
+    <a class="brand" href="#home">
+      T. Maruthi
+    </a>
+
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#project">Project</a>
+      <a href="#planner">Demo</a>
+    </div>
+
+  </div>
 </nav>
 
-<section class="hero">
-<h1>Your Smart Nutrition Assistant</h1>
-<p>Enter your basic details to calculate BMI, estimate daily calories, and receive a simple personalized meal plan.</p>
+
+<main>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+  <div class="container hero-grid">
+
+    <div>
+
+      <span class="badge">
+        B.Tech CSE (AI & Data Science)
+      </span>
+
+      <h1>
+        Hi, I'm <span>T. Maruthi</span>.
+      </h1>
+
+      <p>
+        I build simple, useful web projects that combine
+        software development, artificial intelligence ideas
+        and practical problem solving.
+      </p>
+
+      <div class="buttons">
+
+        <a class="btn primary" href="#project">
+          View My Project
+        </a>
+
+        <a
+          class="btn secondary"
+          href="https://github.com/vtu30096-alt"
+          target="_blank"
+          rel="noopener">
+          GitHub Profile
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <aside class="profile-card">
+
+      <div class="avatar">
+        TM
+      </div>
+
+      <h3>
+        T. Maruthi
+      </h3>
+
+      <p>
+        Computer Science & Engineering
+        (AI & Data Science)
+      </p>
+
+      <div class="mini">
+
+        <div>
+          🎓 VelTech University, Chennai
+        </div>
+
+        <div>
+          💻 Web Development & Java
+        </div>
+
+        <div>
+          🤖 AI / Data Science interests
+        </div>
+
+      </div>
+
+    </aside>
+
+  </div>
+
 </section>
 
-<div class="container" id="planner">
-<div class="card">
-<h2>Nutrition Planner</h2>
-<div class="form-grid">
-<div><label>Name</label><input id="name" placeholder="Enter your name"></div>
-<div><label>Age</label><input id="age" type="number" placeholder="Example: 20"></div>
-<div><label>Gender</label><select id="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></div>
-<div><label>Height (cm)</label><input id="height" type="number" placeholder="Example: 170"></div>
-<div><label>Weight (kg)</label><input id="weight" type="number" placeholder="Example: 65"></div>
-<div><label>Activity Level</label><select id="activity"><option value="1.2">Sedentary</option><option value="1.375">Lightly Active</option><option value="1.55">Moderately Active</option><option value="1.725">Very Active</option></select></div>
-<div><label>Nutrition Goal</label><select id="goal"><option value="maintain">Maintain Weight</option><option value="loss">Weight Loss</option><option value="gain">Weight Gain</option></select></div>
-<div><label>Food Preference</label><select id="food"><option>Vegetarian</option><option>Non-Vegetarian</option><option>Vegan</option></select></div>
-</div>
-<button onclick="calculate()">Generate My Nutrition Plan</button>
-</div>
 
-<div class="card result" id="result">
-<h2>Hello, <span id="userName"></span>! 👋</h2>
-<div class="stats">
-<div class="stat">BMI<strong id="bmi"></strong><span id="category"></span></div>
-<div class="stat">Daily Calories<strong id="calories"></strong><span>kcal/day</span></div>
-<div class="stat">Food Preference<strong id="pref"></strong></div>
-</div>
-</div>
+<!-- ABOUT -->
 
-<div class="card result" id="mealCard">
-<h2>Suggested Meal Plan</h2>
-<div class="meals">
-<div class="meal"><h3>🌅 Breakfast</h3><p id="breakfast"></p></div>
-<div class="meal"><h3>☀️ Lunch</h3><p id="lunch"></p></div>
-<div class="meal"><h3>🌙 Dinner</h3><p id="dinner"></p></div>
-</div>
-</div>
+<section id="about">
 
-<div class="card" id="about">
-<h2>About the Project</h2>
-<p><b>Smart Nutrition Assistant</b> is an educational web-based prototype. It uses HTML, CSS and JavaScript to calculate BMI, estimate calorie requirements using a BMR-based formula, and provide simple meal suggestions based on user preferences.</p>
-<p><b>Note:</b> This project is for educational/demo purposes and is not medical advice.</p>
-</div>
-</div>
+  <div class="container">
 
-<footer>Smart Nutrition Assistant | Minor Project Demo</footer>
+    <h2 class="section-title">
+      About Me
+    </h2>
+
+    <p class="section-sub">
+      I am a B.Tech student interested in programming,
+      web development and AI. My goal is to keep learning
+      by building real projects and improving my technical skills.
+    </p>
+
+
+    <div class="cards">
+
+      <article class="card">
+
+        <h3>
+          🎯 Problem Solving
+        </h3>
+
+        <p>
+          I enjoy turning a problem into a simple,
+          usable software solution.
+        </p>
+
+      </article>
+
+
+      <article class="card">
+
+        <h3>
+          🌐 Web Development
+        </h3>
+
+        <p>
+          I create responsive websites using HTML,
+          CSS and JavaScript.
+        </p>
+
+      </article>
+
+
+      <article class="card">
+
+        <h3>
+          🚀 Continuous Learning
+        </h3>
+
+        <p>
+          I am currently strengthening my Java,
+          AI and data-oriented development skills.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Skills & Technologies
+    </h2>
+
+    <p class="section-sub">
+      Technologies I am learning and using in my academic projects.
+    </p>
+
+
+    <div class="skills">
+
+      <span class="skill">Java</span>
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">GitHub</span>
+      <span class="skill">AI Concepts</span>
+      <span class="skill">Data Structures</span>
+      <span class="skill">Problem Solving</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROJECT -->
+
+<section id="project">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Featured Project
+    </h2>
+
+    <p class="section-sub">
+      My Minor Project-I work, presented as the main project
+      on this portfolio.
+    </p>
+
+
+    <div class="project">
+
+
+      <div class="project-panel">
+
+        <span class="badge">
+          Minor Project-I
+        </span>
+
+        <h2>
+          🥗 Smart Nutrition Assistant
+        </h2>
+
+        <p>
+          An AI-powered personalized diet and health
+          management web project.
+        </p>
+
+
+        <ul class="feature-list">
+
+          <li>
+            BMI calculation
+          </li>
+
+          <li>
+            BMR-based daily calorie estimation
+          </li>
+
+          <li>
+            Activity-level selection
+          </li>
+
+          <li>
+            Nutrition-goal selection
+          </li>
+
+          <li>
+            Food-preference-based meal suggestions
+          </li>
+
+          <li>
+            Responsive web interface
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <div class="card">
+
+        <h3>
+          How it works
+        </h3>
+
+        <p>
+          Users enter basic information and choose
+          their activity level, nutrition goal and
+          food preference.
+        </p>
+
+        <p>
+          The browser calculates BMI and estimates
+          daily calorie requirements using a BMR-based
+          formula, then displays simple meal suggestions.
+        </p>
+
+        <p class="notice">
+          Educational/demo project only.
+          It is not medical advice and should not replace
+          guidance from a qualified healthcare professional.
+        </p>
+
+        <a class="btn primary" href="#planner">
+          Try the Demo
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- INTERACTIVE DEMO -->
+
+<section id="planner">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      Interactive Nutrition Demo
+    </h2>
+
+    <p class="section-sub">
+      Enter your information to test the Smart Nutrition Assistant.
+    </p>
+
+
+    <div class="planner">
+
+      <form id="nutritionForm">
+
+        <div class="form-grid">
+
+
+          <div class="field">
+
+            <label for="name">
+              Name
+            </label>
+
+            <input
+              id="name"
+              placeholder="Enter your name"
+              required>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="age">
+              Age
+            </label>
+
+            <input
+              id="age"
+              type="number"
+              min="10"
+              max="100"
+              placeholder="20"
+              required>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="gender">
+              Gender
+            </label>
+
+            <select id="gender">
+
+              <option value="male">
+                Male
+              </option>
+
+              <option value="female">
+                Female
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="height">
+              Height (cm)
+            </label>
+
+            <input
+              id="height"
+              type="number"
+              min="100"
+              max="250"
+              placeholder="170"
+              required>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="weight">
+              Weight (kg)
+            </label>
+
+            <input
+              id="weight"
+              type="number"
+              min="20"
+              max="300"
+              placeholder="65"
+              required>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="activity">
+              Activity Level
+            </label>
+
+            <select id="activity">
+
+              <option value="1.2">
+                Sedentary
+              </option>
+
+              <option value="1.375">
+                Lightly Active
+              </option>
+
+              <option value="1.55">
+                Moderately Active
+              </option>
+
+              <option value="1.725">
+                Very Active
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="goal">
+              Nutrition Goal
+            </label>
+
+            <select id="goal">
+
+              <option value="loss">
+                Weight Loss
+              </option>
+
+              <option value="maintain">
+                Maintain Weight
+              </option>
+
+              <option value="gain">
+                Weight Gain
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="food">
+              Food Preference
+            </label>
+
+            <select id="food">
+
+              <option>
+                Vegetarian
+              </option>
+
+              <option>
+                Non-Vegetarian
+              </option>
+
+              <option>
+                Eggitarian
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="full">
+
+            <button
+              class="btn primary"
+              type="submit">
+
+              Generate My Nutrition Plan
+
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </form>
+
+
+      <div id="result" class="result">
+
+        <h3 id="hello"></h3>
+
+
+        <div class="stats">
+
+          <div class="stat">
+
+            <span>
+              BMI
+            </span>
+
+            <b id="bmi"></b>
+
+          </div>
+
+
+          <div class="stat">
+
+            <span>
+              Calories
+            </span>
+
+            <b id="calories"></b>
+
+          </div>
+
+
+          <div class="stat">
+
+            <span>
+              Preference
+            </span>
+
+            <b id="preference"></b>
+
+          </div>
+
+        </div>
+
+
+        <h3>
+          Suggested Meal Plan
+        </h3>
+
+
+        <p>
+          <b>🌅 Breakfast:</b>
+          <span id="breakfast"></span>
+        </p>
+
+
+        <p>
+          <b>☀️ Lunch:</b>
+          <span id="lunch"></span>
+        </p>
+
+
+        <p>
+          <b>🌙 Dinner:</b>
+          <span id="dinner"></span>
+        </p>
+
+
+        <p class="notice">
+          This is an educational estimate,
+          not medical or dietary advice.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <div class="container">
+
+    <strong>
+      T. Maruthi
+    </strong>
+
+    · Smart Nutrition Assistant
+    · Built with HTML, CSS & JavaScript
+
+    <br>
+
+    <span>
+      © 2026 T. Maruthi
+    </span>
+
+  </div>
+
+</footer>
+
 
 <script>
-function calculate(){
- const name=document.getElementById("name").value || "User";
- const age=Number(document.getElementById("age").value);
- const gender=document.getElementById("gender").value;
- const height=Number(document.getElementById("height").value);
- const weight=Number(document.getElementById("weight").value);
- const activity=Number(document.getElementById("activity").value);
- const goal=document.getElementById("goal").value;
- const food=document.getElementById("food").value;
 
- if(!age || !height || !weight || !gender){alert("Please fill in age, gender, height and weight.");return;}
+  const form =
+    document.getElementById("nutritionForm");
 
- const bmi=weight/((height/100)*(height/100));
- let category=bmi<18.5?"Underweight":bmi<25?"Normal":bmi<30?"Overweight":"Obesity";
 
- let bmr=gender==="Male"?(10*weight+6.25*height-5*age+5):(10*weight+6.25*height-5*age-161);
- let calories=bmr*activity;
- if(goal==="loss") calories-=300;
- if(goal==="gain") calories+=300;
+  form.addEventListener("submit", function(e) {
 
- document.getElementById("userName").textContent=name;
- document.getElementById("bmi").textContent=bmi.toFixed(1);
- document.getElementById("category").textContent=category;
- document.getElementById("calories").textContent=Math.round(calories);
- document.getElementById("pref").textContent=food;
+    e.preventDefault();
 
- let meals;
- if(food==="Vegetarian"){
-   meals=["Oats with milk, banana and nuts","Rice/roti with dal, vegetables and curd","Chapati with paneer/tofu and vegetables"];
- }else if(food==="Vegan"){
-   meals=["Oats with plant milk, banana and nuts","Rice with dal, vegetables and salad","Chapati with tofu and mixed vegetables"];
- }else{
-   meals=["Eggs with whole-grain toast and fruit","Rice/roti with chicken, dal and vegetables","Grilled chicken/fish with vegetables and chapati"];
- }
- document.getElementById("breakfast").textContent=meals[0];
- document.getElementById("lunch").textContent=meals[1];
- document.getElementById("dinner").textContent=meals[2];
 
- document.querySelectorAll(".result").forEach(x=>x.style.display="block");
- document.getElementById("result").scrollIntoView({behavior:"smooth"});
-}
+    const name =
+      document.getElementById("name").value.trim();
+
+    const age =
+      Number(document.getElementById("age").value);
+
+    const height =
+      Number(document.getElementById("height").value);
+
+    const weight =
+      Number(document.getElementById("weight").value);
+
+    const gender =
+      document.getElementById("gender").value;
+
+    const activity =
+      Number(document.getElementById("activity").value);
+
+    const goal =
+      document.getElementById("goal").value;
+
+    const food =
+      document.getElementById("food").value;
+
+
+    /* BMI */
+
+    const bmi =
+      weight / Math.pow(height / 100, 2);
+
+
+    /* BMR */
+
+    let bmr;
+
+    if (gender === "male") {
+
+      bmr =
+        (10 * weight) +
+        (6.25 * height) -
+        (5 * age) +
+        5;
+
+    } else {
+
+      bmr =
+        (10 * weight) +
+        (6.25 * height) -
+        (5 * age) -
+        161;
+
+    }
+
+
+    /* DAILY CALORIES */
+
+    let calories =
+      bmr * activity;
+
+
+    if (goal === "loss") {
+
+      calories -= 400;
+
+    }
+
+
+    if (goal === "gain") {
+
+      calories += 300;
+
+    }
+
+
+    /* MEAL SUGGESTIONS */
+
+    const meals = {
+
+      "Vegetarian": {
+
+        breakfast:
+          "Oats with milk/curd and fruit.",
+
+        lunch:
+          "Rice or chapati with dal, vegetables and curd.",
+
+        dinner:
+          "Chapati with mixed vegetables and dal."
+
+      },
+
+
+      "Non-Vegetarian": {
+
+        breakfast:
+          "Eggs with whole-grain toast and fruit.",
+
+        lunch:
+          "Rice or chapati with chicken/fish and vegetables.",
+
+        dinner:
+          "Chapati with lean chicken/fish and vegetables."
+
+      },
+
+
+      "Eggitarian": {
+
+        breakfast:
+          "Egg omelette with oats or whole-grain toast.",
+
+        lunch:
+          "Rice or chapati with dal, vegetables and eggs.",
+
+        dinner:
+          "Chapati with vegetables and boiled eggs."
+
+      }
+
+    };
+
+
+    /* DISPLAY RESULTS */
+
+    document.getElementById("hello").textContent =
+      `Hello, ${name}! 👋`;
+
+
+    document.getElementById("bmi").textContent =
+      bmi.toFixed(1);
+
+
+    document.getElementById("calories").textContent =
+      Math.max(1200, Math.round(calories)) +
+      " kcal";
+
+
+    document.getElementById("preference").textContent =
+      food;
+
+
+    document.getElementById("breakfast").textContent =
+      meals[food].breakfast;
+
+
+    document.getElementById("lunch").textContent =
+      meals[food].lunch;
+
+
+    document.getElementById("dinner").textContent =
+      meals[food].dinner;
+
+
+    document
+      .getElementById("result")
+      .classList.add("show");
+
+
+    document
+      .getElementById("result")
+      .scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+  });
+
 </script>
+
 </body>
 </html>
